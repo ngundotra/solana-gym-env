@@ -348,7 +348,7 @@ Remember to use ```typescript code blocks for your transaction code.
                     'duration': (datetime.now() - message_start_time).total_seconds(),
                     'reward': reward if 'reward' in locals() else 0,
                     'total_reward': env.total_reward,
-                    'instructions_discovered': instructions_discovered
+                    'instructions_discovered': instructions_discovered if 'instructions_discovered' in locals() else {}
                 }
                 
                 self.metrics['messages'].append(message_metrics)

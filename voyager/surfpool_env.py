@@ -328,12 +328,13 @@ class SurfpoolEnv(gym.Env):
                 'data': base58.b58decode(ix.data),
             })
             # pdb.set_trace()
-            ordered_instructions.extend(
-                [{
-                    'program_id': message.account_keys[inner_instruction.program_id_index],
-                    'data': base58.b58decode(inner_instruction.data),
-                } for inner_instruction in inner_instructions[idx]]
-            )
+            if idx in inner_instructions:
+                ordered_instructions.extend(
+                    [{
+                        'program_id': message.account_keys[inner_instruction.program_id_index],
+                        'data': base58.b58decode(inner_instruction.data),
+                    } for inner_instruction in inner_instructions[idx]]
+                )
         return ordered_instructions
     
     def _calculate_reward(self, tx_result: GetTransactionResp) -> float:
